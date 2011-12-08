@@ -1,0 +1,1 @@
+<h1>Hello! I`m forum module index controller index action!</h1>
