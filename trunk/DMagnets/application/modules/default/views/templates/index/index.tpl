@@ -1,1 +1,0 @@
-<h1>Hello! I`m default module index controller index action!</h1>
