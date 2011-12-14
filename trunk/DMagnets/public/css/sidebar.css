@@ -1,0 +1,104 @@
+@CHARSET "UTF-8";
+
+/*--------------------- Sidebar -------------------------*/
+#sidebar {
+	background-color: transparent;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	float: right;
+	width: 195px;
+	color: #000000;
+}
+.block {
+	position: relative;
+	background-color: transparent;
+	background-image: url('/resources/sidebar.png');
+	background-position: 0% 0%;
+	background-repeat: no-repeat;
+	color: #FFFFFF;
+	padding-top: 10px;
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+
+#title {
+	position:relative;
+	color: rgb(202,81,10);
+}
+#blk-cntnt {
+	position: relative;
+	padding: 10px 0px 10px 10px;
+}
+	/*----Auth block----*/
+#auth_err {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 10px 0px 0px 0px;
+	padding-top: 30px;
+	height: 50px;
+	width: 195px;
+	background: rgba(0,0,0,0.8);
+	text-align: center;
+	z-index: 998;
+	display: none;
+}
+#auth_err img {
+	width: 16px;
+}
+#auth_tab {
+	margin-left: -10px;
+}
+#auth_tab tr td {
+	font-family:verdana,arial,helvetica;
+	font-size:8pt;
+}
+	/*----User block----*/
+#prof_bttn {
+	width: 30px;
+	margin-left: -10px;
+	float: left;
+}
+#avatar {
+	width: 140px;
+	float: right;
+	margin-right: 10px;
+}
+#user_info {
+	margin-left: -10px;
+	margin-right: 10px;
+}
+
+
+
+#prof_block {
+	margin: 10px;
+}
+#prof_form{clear: both; display:none;}
+#profile_bttn {
+	width: 30px;
+	float: left;
+}
+#prof_info, #password_change, #delete_answr, #avatar_upld {
+	width: 725px;
+	padding: 0px 0px 10px 10px;
+	border-left: 1px solid rgb(202,81,10);
+	float: right;
+	text-align: left;
+	font-size: 10pt;
+}
+#prof_info table tr td {
+	border-bottom: 1px solid rgb(202,81,10);
+	padding-top: 5px;
+	padding-right: 10px;
+}
+
+.avatar_small {
+	width: 100px;
+	float: left;
+	border-right: 1px solid rgb(202,81,10);
+}
+#avatar img, .avatar_small img {
+	margin: 0;
+}
