@@ -1,0 +1,42 @@
+@CHARSET 'UTF-8';
+
+#admin_bttn {
+	margin: 10px 0px 10px 15px;
+}
+#admin_bttn img {
+	width: 30px;
+	margin: 0px 10px 0px 0px;
+}
+.paginating_control {
+	padding: 5px 0 5px 10px;
+}
+#admin_content table thead td {
+	background-color: rgba(0,0,0,0.5);
+}
+#admin_content table thead td img {
+	width: 10px;
+	margin: 0;
+}
+#admin_content table thead td:hover {
+	cursor: pointer;
+}
+#admin_content table tbody td {
+	padding-left: 5px;
+}
+#admin_content table tbody tr:nth-child(even) {
+	background-color: rgba(25,25,25,0.5);
+}
+#admin_content table tbody tr:nth-child(odd) {
+	background-color: rgba(25,25,25,0.3);
+}
+#admin_sub_bttn {
+	margin: 10px 0px 0px 20px;
+}
+.act {width: 40px;}
+.act img, #admin_sub_bttn img {
+	width: 14px;
+	margin: 0 2px 0 0;
+}
+.act img:hover, #admin_sub_bttn img:hover {
+	cursor:pointer;
+}

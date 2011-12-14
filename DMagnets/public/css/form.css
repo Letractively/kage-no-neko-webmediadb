@@ -1,0 +1,12 @@
+/*--------------------- Forms ----------------------*/
+#form_tab {
+	width: 100%;
+	border-spacing: 2px;
+	padding: 10px;
+	font-size: 16px;
+}
+#space {
+	padding: 10px 0px 10px 0px;
+}
+#form_tab tr td:first-child{width: 30%;}
+#form_tab ul li {color: red; float: left;}
