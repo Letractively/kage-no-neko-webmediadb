@@ -16,7 +16,7 @@ class Application_Form_Auth extends Zend_Form
         $email->setLabel('E-mail')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50',
+        	  			'maxlength'=>'250',
         	  			'style'=>'width: 100%;'
         	  ))
         	  ->setRequired(true)

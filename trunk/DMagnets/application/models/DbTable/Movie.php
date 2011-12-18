@@ -33,7 +33,15 @@ class Application_Model_DbTable_Movie extends Zend_Db_Table_Abstract
 	
 	public function addMovie($form)
 	{
-		$video = new Application_Model_DbTable_Video();
+		$ret = true;
+		
+		$video		= new Application_Model_DbTable_Video();
+		$file		= new Application_Model_DbTable_File();
+		$actor		= new Application_Model_DbTable_ActorInFilm();
+		$director	= new Application_Model_DbTable_DirectorOfFilm();
+		$country	= new Application_Model_DbTable_CountryOfFilm();
+		$genre		= new Application_Model_DbTable_GenreOfFilm();
+		
 		$videoData['serial']		= 'no';
 		$videoData['cartoon']		= $form->getValue('cartoon');
 		$videoData['name']			= $form->getValue('name');
@@ -47,11 +55,48 @@ class Application_Model_DbTable_Movie extends Zend_Db_Table_Abstract
 	    	$form->poster->receive();
     	}
 		$movieData['item_id'] = $video->insert($videoData);
-		if(!empty($movieData['item_id'])){
+		
+		$fileData['file_link'] = $form->getValue('magnet');
+		$movieData['file_id'] = $file->insert($fileData);
+		
+		if(!empty($movieData['item_id']) && !empty($movieData['file_id'])){
     		$movieData['year']			= $form->getValue('year');
     		$movieData['length']		= $form->getValue('length');
+    		$this->insert($movieData);
 		}
-    	else return false;
+    	else $ret = false;
+    	
+    	$ids = $form->getValue('actors');
+    	$actorData['film_id'] = $movieData['item_id'];
+    	foreach($ids as $key => $value){
+	    	$actorData['actor_id'] = $value;
+	    	$actor->insert($actorData);
+    	}
+
+		$ids = $form->getValue('directors');
+    	$directorData['film_id'] = $movieData['item_id'];
+    	foreach($ids as $key => $value){
+	    	$directorData['producer_id'] = $value;
+	    	$director->insert($directorData);
+    	}
+    	
+		$ids = $form->getValue('countries');
+    	$countryData['film_id'] = $movieData['item_id'];
+    	foreach($ids as $key => $value){
+	    	$countryData['country_id'] = $value;
+	    	$country->insert($countryData);
+    	}
+    	
+		$ids = $form->getValue('genres');
+    	$genreData['film_id'] = $movieData['item_id'];
+    	foreach($ids as $key => $value){
+	    	$genreData['genre_id'] = $value;
+	    	$genre->insert($genreData);
+    	}
+    	
+    	
+    	
+    	return $ret;
 	}
 }
 

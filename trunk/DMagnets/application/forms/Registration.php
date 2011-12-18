@@ -20,7 +20,7 @@ class Application_Form_Registration extends Zend_Form
         $email->setLabel('E-mail')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
@@ -78,7 +78,7 @@ class Application_Form_Registration extends Zend_Form
         $nickname->setLabel('Ник')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'20'
+        	  			'maxlength'=>'50'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
@@ -96,7 +96,7 @@ class Application_Form_Registration extends Zend_Form
         $first_name->setLabel('Фамилия')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
@@ -115,7 +115,7 @@ class Application_Form_Registration extends Zend_Form
         $last_name->setLabel('Имя')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
