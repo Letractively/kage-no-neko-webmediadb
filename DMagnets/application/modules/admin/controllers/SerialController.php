@@ -2,11 +2,13 @@
 
 class Admin_SerialController extends Zend_Controller_Action
 {
+	private $_video;
 	private $_serial;
 
     public function init()
     {
     	$this->view->headLink()->appendStylesheet('/css/admin.css');
+    	$this->_video = new Application_Model_DbTable_Video();
     	$this->_serial = new Application_Model_DbTable_Serial();
     }
 
@@ -24,17 +26,19 @@ class Admin_SerialController extends Zend_Controller_Action
 
     public function addAction()
     {
+	    $this->view->headLink()->appendStylesheet('/css/form.css');
     	$form = new Application_Form_Video();
     	$form->setName('serial')
     		 ->setAction('/admin/serial/add');
+    	$form->getElement('cencel')->setAttrib('onClick', "javascript: window.location = '/".$this->_request->getModuleName()."/".$this->_request->getControllerName()."'");
 		$this->view->form = $form;
 		if($this->getRequest()->isPost()){
-			$regData = $this->getRequest()->getPost();
-			if($form->isValid($regData)){
-				$this->_user->addUser($form);
-				$this->_helper->redirector('index','user');
+			$formData = $this->getRequest()->getPost();
+			if($form->isValid($formData)){
+				$this->_serial->addSerial($form);
+				$this->_helper->redirector('index');
 			}
-			else $form->populate($regData);
+			else $form->populate($formData);
 		}
     }
     /*

@@ -2,6 +2,7 @@
 
 class Application_Form_Video extends Zend_Form
 {
+	
 
     public function init()
     {
@@ -36,7 +37,7 @@ class Application_Form_Video extends Zend_Form
         $name->setLabel('Название')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'20'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
@@ -54,7 +55,7 @@ class Application_Form_Video extends Zend_Form
         $original_name->setLabel('Оригинальное название')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
@@ -150,7 +151,7 @@ class Application_Form_Video extends Zend_Form
         	  ->setRequired(true)
         	  ->addFilter('StringTrim')
         	  ->addValidator('NotEmpty',true)
-        	  ->addValidator('Regex',true,array('/^(magnet:\?xt=urn:tree:tiger:[\w\d]+\&xl=\d+\&dn=(\w|\d|\.|\%)+)$/'))
+        	  ->addValidator('Regex',true,array('/^(magnet:\?xt=urn:tree:tiger:[\w\d]+\&xl=\d+\&dn=(\w|\d|\.|\%|\(|\)|\_|\-)+)$/'))
         	  ->addValidator(new Ext_Validate_NoDbRecordExists('files', 'file_link'),true)
         	  ->setDecorators(array(
         				'ViewHelper',
@@ -167,45 +168,44 @@ class Application_Form_Video extends Zend_Form
     	$country_entity = new Application_Model_DbTable_Country();
     	$genre_entity = new Application_Model_DbTable_Genre();
     			   
-    	$actors_list['Выберите']='Выберите';
     	$list = $actor_entity->getActorsMass()->toArray();
     	foreach ($list as $key => $value){
-    		$actors_list2[$value['actor_id']] = $value['first_name'].' '.$value['last_name'];
+    		$actors_list[$value['actor_id']] = $value['first_name'].' '.$value['last_name'];
+    		$actors_haystack[$value['actor_id']] = $value['actor_id'];
     	}
-    	$actors_list += $actors_list2;
-    	$directors_list['Выберите']='Выберите';
+
+
     	$list = $director_entity->getDirectorsMass()->toArray();
     	foreach ($list as $key => $value){
-    		$directors_list2[$value['producer_id']] = $value['first_name'].' '.$value['last_name'];
+    		$directors_list[$value['producer_id']] = $value['first_name'].' '.$value['last_name'];
+    		$directors_haystack[$value['producer_id']] = $value['producer_id'];
     	}
-    	$directors_list += $directors_list2;
-    	$countries_list['Выберите']='Выберите';
+
+    	
     	$list = $country_entity->getCountriesMass()->toArray();
     	foreach ($list as $key => $value){
-    		$countries_list2[$value['country_id']] = $value['name'];
+    		$countries_list[$value['country_id']] = $value['name'];
+    		$countries_haystack[$value['country_id']] = $value['country_id'];
     	}
-    	$countries_list += $countries_list2;
-    	$genres_list['Выберите']='Выберите';
+    	
+    	
     	$list = $genre_entity->getGenresMass()->toArray();
     	foreach ($list as $key => $value){
-    		$genres_list2[$value['genre_id']] = $value['name'];
+    		$genres_list[$value['genre_id']] = $value['name'];
+    		$genres_haystack[$value['genre_id']] = $value['genre_id'];
     	}
-    	$genres_list += $genres_list2;
-    	/*Ext_Unificated::ext_var_dump(array(
-    		'actors'	=> $actors_list,
-    		'directors'	=> $directors_list,
-    		'countries'	=> $countries_list,
-    		'genres'	=> $genres_list
-    	));*/
+
+    	//Ext_Unificated::ext_var_dump($actors_list,$directors_list,$countries_list,$genres_list);
 
     	$actors = new Zend_Form_Element_Select('actors', array(
             'multiOptions'=> $actors_list,
         ));
         $actors->setLabel('Актеры')
-        	->setAttrib('onClick', "javascript: $('option[value=Выберите]').attr('disabled','disabled')")
+        	->setAttrib('multiple', 'multiple')
+        	->setAttrib('size','5')
        		->setValue('Выберите')
        		->setRequired(true)
-       		->addValidator('InArray', true, array($actors_list2))
+       		->addValidator(new Ext_Validate_MultipleInArray($actors_haystack), true)
        		->setDecorators(array(
         				'ViewHelper',
         				'Errors',
@@ -218,10 +218,11 @@ class Application_Form_Video extends Zend_Form
             'multiOptions'=> $directors_list,
         ));
         $directors->setLabel('Режиссеры')
-        	->setAttrib('onClick', "javascript: $('option[value=Выберите]').attr('disabled','disabled')")
+        	->setAttrib('multiple', 'multiple')
+        	->setAttrib('size','5')
        		->setValue('Выберите')
        		->setRequired(true)
-       		->addValidator('InArray', true, array($directors_list2))
+       		->addValidator(new Ext_Validate_MultipleInArray($directors_haystack), true)
        		->setDecorators(array(
         				'ViewHelper',
         				'Errors',
@@ -234,10 +235,11 @@ class Application_Form_Video extends Zend_Form
             'multiOptions'=> $countries_list,
         ));
         $countries->setLabel('Страны')
-        	->setAttrib('onClick', "javascript: $('option[value=Выберите]').attr('disabled','disabled')")
+        	->setAttrib('multiple', 'multiple')
+        	->setAttrib('size','5')
        		->setValue('Выберите')
        		->setRequired(true)
-       		->addValidator('InArray', true, array($countries_list2))
+       		->addValidator(new Ext_Validate_MultipleInArray($countries_haystack), true)
        		->setDecorators(array(
         				'ViewHelper',
         				'Errors',
@@ -250,10 +252,11 @@ class Application_Form_Video extends Zend_Form
             'multiOptions'=> $genres_list,
         ));
         $genres->setLabel('Жанры')
-        	->setAttrib('onClick', "javascript: $('option[value=Выберите]').attr('disabled','disabled')")
+        	->setAttrib('multiple', 'multiple')
+        	->setAttrib('size','5')
        		->setValue('Выберите')
        		->setRequired(true)
-       		->addValidator('InArray', true, array($genres_list2))
+       		->addValidator(new Ext_Validate_MultipleInArray($genres_haystack), true)
        		->setDecorators(array(
         				'ViewHelper',
         				'Errors',

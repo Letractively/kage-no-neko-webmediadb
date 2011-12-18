@@ -19,7 +19,7 @@ class Application_Form_People extends Zend_Form
         $first_name->setLabel('Фамилия')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
@@ -38,7 +38,7 @@ class Application_Form_People extends Zend_Form
         $last_name->setLabel('Имя')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')

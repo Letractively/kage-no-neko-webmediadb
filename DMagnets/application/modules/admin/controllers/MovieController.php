@@ -35,7 +35,7 @@ class Admin_MovieController extends Zend_Controller_Action
 		if($this->getRequest()->isPost()){
 			$formData = $this->getRequest()->getPost();
 			if($form->isValid($formData)){
-				$this->_video->addVideo($form);
+				$this->_movie->addMovie($form);
 				$this->_helper->redirector('index');
 			}
 			else $form->populate($formData);

@@ -19,7 +19,7 @@ class Application_Form_TextField extends Zend_Form
         $name->setLabel('Название')
         	  ->setAttribs(array(
         	  			'size'=>'20',
-        	  			'maxlength'=>'50'
+        	  			'maxlength'=>'250'
         	  ))
         	  ->setRequired(true)
         	  ->addFilter('StripTags')
