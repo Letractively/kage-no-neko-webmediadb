@@ -45,11 +45,14 @@ class Admin_MovieController extends Zend_Controller_Action
 	public function editAction()
     {
     	//$this->_helper->redirector('index','user');
-    }
+    }*/
     
 	public function deleteAction()
     {
-    	if($this->_getParam('id',null) != null)
-    }*/
+    	if($this->_getParam('id',null) != null){
+    		$this->_video->deleteVideo($this->_getParam('id'));
+    	}
+    	$this->_helper->redirector('index');
+    }
 }
 

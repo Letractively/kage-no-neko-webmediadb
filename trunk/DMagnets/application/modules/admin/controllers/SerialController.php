@@ -31,6 +31,33 @@ class Admin_SerialController extends Zend_Controller_Action
     	$form->setName('serial')
     		 ->setAction('/admin/serial/add');
     	$form->getElement('cencel')->setAttrib('onClick', "javascript: window.location = '/".$this->_request->getModuleName()."/".$this->_request->getControllerName()."'");
+    	$form->removeElement('magnet');
+    	$form->removeElement('length');
+    	$form->getElement('year')->setLabel('Год начала');
+    	
+    	$list['Выберите']='Выберите';
+    	$list['...']='...';
+    	$list2['...']='...';
+    	for($i=(int)date('Y',time());$i>1920;$i--){
+    		$list[$i] = $i;
+    		$list2[$i] = $i;
+    	}
+    	$year_end = new Zend_Form_Element_Select('year_end', array(
+            'multiOptions'=> $list,
+        ));
+        $year_end->setLabel('Год окончания')
+        	->setAttrib('onClick', "javascript: $('option[value=Выберите]').attr('disabled','disabled')")
+       		->setValue('Выберите')
+       		->setRequired(true)
+       		->addValidator('InArray', true, array($list2))
+       		->setDecorators(array(
+        				'ViewHelper',
+        				'Errors',
+        				array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+        				array('Label', array('tag' => 'td')),
+        				array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
+    			   ));
+    	$form->addElement($year_end);
 		$this->view->form = $form;
 		if($this->getRequest()->isPost()){
 			$formData = $this->getRequest()->getPost();
@@ -45,11 +72,14 @@ class Admin_SerialController extends Zend_Controller_Action
 	public function editAction()
     {
     	//$this->_helper->redirector('index','user');
-    }
+    }*/
     
 	public function deleteAction()
     {
-    	if($this->_getParam('id',null) != null)
-    }*/
+    	if($this->_getParam('id',null) != null){
+    		$this->_video->deleteVideo($this->_getParam('id'));
+    	}
+    	$this->_helper->redirector('index');
+    }
 }
 
