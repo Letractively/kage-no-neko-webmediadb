@@ -18,6 +18,14 @@ class Application_Model_DbTable_Episode extends Zend_Db_Table_Abstract
 		)
 	);
 
+	public function getAllEpisodes($pageNumber,$recordsCount)
+    {
+    	$select = $this->select();
+    	$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbTableSelect($select));
+		$paginator->setCurrentPageNumber($pageNumber);
+		$paginator->setItemCountPerPage($recordsCount);
+		return $paginator;
+    }
 
 }
 

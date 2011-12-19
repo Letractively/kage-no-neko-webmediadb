@@ -108,5 +108,8 @@ class Application_Model_DbTable_Video extends Zend_Db_Table_Abstract
 		return $video;
 	}
 
+	public function deleteVideo($id){
+    	$this->delete('film_id = '.$id);
+    }
 }
 

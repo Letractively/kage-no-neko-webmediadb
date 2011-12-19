@@ -54,47 +54,48 @@ class Application_Model_DbTable_Serial extends Zend_Db_Table_Abstract
     	}
 		$serialData['item_id'] = $video->insert($videoData);
 		
-		//$fileData['file_link'] = $form->getValue('magnet');
-		//$serialData['file_id'] = $file->insert($fileData);
-		
-		if(!empty($serialData['item_id']) && !empty($serialData['file_id'])){
-    		$serialData['year_start']			= $form->getValue('year');
+		if(!empty($serialData['item_id'])){
+    		$serialData['year_start']	= $form->getValue('year');
     		$serialData['year_end']		= $form->getValue('year_end');
     		$this->insert($serialData);
+    		
+			$ids = $form->getValue('actors');
+	    	$actorData['film_id'] = $serialData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$actorData['actor_id'] = $value;
+		    	$actor->insert($actorData);
+	    	}
+	
+			$ids = $form->getValue('directors');
+	    	$directorData['film_id'] = $serialData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$directorData['producer_id'] = $value;
+		    	$director->insert($directorData);
+	    	}
+	    	
+			$ids = $form->getValue('countries');
+	    	$countryData['film_id'] = $serialData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$countryData['country_id'] = $value;
+		    	$country->insert($countryData);
+	    	}
+	    	
+			$ids = $form->getValue('genres');
+	    	$genreData['film_id'] = $serialData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$genreData['genre_id'] = $value;
+		    	$genre->insert($genreData);
+	    	}
 		}
-    	else $ret = false;
-    	
-    	$ids = $form->getValue('actors');
-    	$actorData['film_id'] = $serialData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$actorData['actor_id'] = $value;
-	    	$actor->insert($actorData);
+    	else{
+    		$ret = false;
     	}
-
-		$ids = $form->getValue('directors');
-    	$directorData['film_id'] = $serialData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$directorData['producer_id'] = $value;
-	    	$director->insert($directorData);
-    	}
-    	
-		$ids = $form->getValue('countries');
-    	$countryData['film_id'] = $serialData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$countryData['country_id'] = $value;
-	    	$country->insert($countryData);
-    	}
-    	
-		$ids = $form->getValue('genres');
-    	$genreData['film_id'] = $serialData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$genreData['genre_id'] = $value;
-	    	$genre->insert($genreData);
-    	}
-    	
-    	
-    	
+    	   	
     	return $ret;
 	}
+	
+	public function deleteSerial($id){
+    	$this->delete('item_id = '.$id);
+    }
 }
 
