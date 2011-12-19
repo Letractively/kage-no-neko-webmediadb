@@ -74,6 +74,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	$acl->addResource('admin:genre','admin');
     	$acl->addResource('admin:section','admin');
     	$acl->addResource('admin:topic','admin');
+    	$acl->addResource('admin:season','admin');
+    	$acl->addResource('admin:episode','admin');
     	
     	//media module
     	$acl->addResource('media');
