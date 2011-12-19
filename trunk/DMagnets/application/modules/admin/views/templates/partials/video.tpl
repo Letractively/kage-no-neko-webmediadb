@@ -10,10 +10,17 @@
     {$this->element->name}
     {$this->element->original_name}
     {$this->element->year}
+    {if isset($this->element->year_end)}
+    	{$this->element->year_end}
+    {/if}
     {$this->element->about}
-    {$this->element->length}
+    {if isset($this->element->length)}
+	    {$this->element->length}
+	{/if}
     {$this->element->poster}
-    {$this->element->magnet}
+    {if isset($this->element->magnet)}
+    	{$this->element->magnet}
+    {/if}
     {$this->element->actors}
     {$this->element->directors}
     {$this->element->countries}
