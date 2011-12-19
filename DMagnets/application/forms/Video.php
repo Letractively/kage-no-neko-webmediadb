@@ -2,13 +2,12 @@
 
 class Application_Form_Video extends Zend_Form
 {
-	
 
     public function init()
     {
     	$translator = new Zend_Translate('array', APPLICATION_PATH.'/languages/errors.php');
     	$this->setTranslator($translator);
-    	
+
         $this->setName('video');
         $this->setMethod('post');
         $this->setAction('');
@@ -81,7 +80,6 @@ class Application_Form_Video extends Zend_Form
         	->setAttrib('onClick', "javascript: $('option[value=Выберите]').attr('disabled','disabled')")
        		->setValue('Выберите')
        		->setRequired(true)
-       		->addValidator('Digits',true)
        		->addValidator('InArray', true, array($list2))
        		->setDecorators(array(
         				'ViewHelper',
