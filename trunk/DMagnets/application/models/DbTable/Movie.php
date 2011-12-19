@@ -63,40 +63,44 @@ class Application_Model_DbTable_Movie extends Zend_Db_Table_Abstract
     		$movieData['year']			= $form->getValue('year');
     		$movieData['length']		= $form->getValue('length');
     		$this->insert($movieData);
-		}
-    	else $ret = false;
-    	
-    	$ids = $form->getValue('actors');
-    	$actorData['film_id'] = $movieData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$actorData['actor_id'] = $value;
-	    	$actor->insert($actorData);
-    	}
+    		
+	    	$ids = $form->getValue('actors');
+	    	$actorData['film_id'] = $movieData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$actorData['actor_id'] = $value;
+		    	$actor->insert($actorData);
+	    	}
 
-		$ids = $form->getValue('directors');
-    	$directorData['film_id'] = $movieData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$directorData['producer_id'] = $value;
-	    	$director->insert($directorData);
+			$ids = $form->getValue('directors');
+	    	$directorData['film_id'] = $movieData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$directorData['producer_id'] = $value;
+		    	$director->insert($directorData);
+	    	}
+	    	
+			$ids = $form->getValue('countries');
+	    	$countryData['film_id'] = $movieData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$countryData['country_id'] = $value;
+		    	$country->insert($countryData);
+	    	}
+	    	
+			$ids = $form->getValue('genres');
+	    	$genreData['film_id'] = $movieData['item_id'];
+	    	foreach($ids as $key => $value){
+		    	$genreData['genre_id'] = $value;
+		    	$genre->insert($genreData);
+	    	}
+		}
+    	else{
+    		$ret = false;
     	}
-    	
-		$ids = $form->getValue('countries');
-    	$countryData['film_id'] = $movieData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$countryData['country_id'] = $value;
-	    	$country->insert($countryData);
-    	}
-    	
-		$ids = $form->getValue('genres');
-    	$genreData['film_id'] = $movieData['item_id'];
-    	foreach($ids as $key => $value){
-	    	$genreData['genre_id'] = $value;
-	    	$genre->insert($genreData);
-    	}
-    	
-    	
-    	
+    	    	
     	return $ret;
 	}
+	
+	public function deleteMovie($id){
+    	$this->delete('item_id = '.$id);
+    }
 }
 
