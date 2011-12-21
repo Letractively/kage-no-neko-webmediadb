@@ -98,12 +98,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	$acl->allow('guest','default:registration');
     	//$acl->allow('guest','default:error');
     	$acl->allow('guest','media');
+    	//$acl->allow('guest','forum');
     	
     	
     	$acl->allow('User','default:auth',array('logout'));
     	$acl->deny('User','default:auth',array('login'));
     	$acl->allow('User','default:profile');
     	$acl->deny('User','default:registration');
+    	$acl->allow('User','forum');
     	
     	$acl->allow('Administrator');
     	$acl->deny('Administrator','default:registration');
