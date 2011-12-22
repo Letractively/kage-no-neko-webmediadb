@@ -14,6 +14,9 @@ class Admin_SeasonController extends Zend_Controller_Action
     {
     	if($this->_getParam('serial',null) != null){
     		$this->view->all_seasons = $this->_season->getAllSeasons($this->_getParam('page',1),50,$this->_getParam('serial'));
+    		$video = new Application_Model_DbTable_Video();
+    		$name = $video->find($this->_getParam('serial'))->current();
+    		$this->view->serial_name = $name['name']; 
     		$this->view->controller = $this->_request->getControllerName();
     		$param['urlPart'] =  '/'.$this->_request->getModuleName().'/'.$this->_request->getControllerName().'/'.$this->_request->getActionName();
     		$this->view->paginatorParam = $param;
