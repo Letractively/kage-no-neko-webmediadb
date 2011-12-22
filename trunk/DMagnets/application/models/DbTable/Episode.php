@@ -18,9 +18,9 @@ class Application_Model_DbTable_Episode extends Zend_Db_Table_Abstract
 		)
 	);
 
-	public function getAllEpisodes($pageNumber,$recordsCount)
+	public function getAllEpisodes($pageNumber,$recordsCount,$season_id)
     {
-    	$select = $this->select();
+    	$select = $this->select()->where('season_id = ?',$season_id);
     	$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbTableSelect($select));
 		$paginator->setCurrentPageNumber($pageNumber);
 		$paginator->setItemCountPerPage($recordsCount);
