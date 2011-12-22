@@ -8,6 +8,7 @@ class Admin_SerialController extends Zend_Controller_Action
     public function init()
     {
     	$this->view->headLink()->appendStylesheet('/css/admin.css');
+    	$this->view->headScript()->appendFile('/js/admin.js');
     	$this->_video = new Application_Model_DbTable_Video();
     	$this->_serial = new Application_Model_DbTable_Serial();
     }
