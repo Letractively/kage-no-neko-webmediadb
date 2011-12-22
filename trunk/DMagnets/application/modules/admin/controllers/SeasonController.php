@@ -12,10 +12,15 @@ class Admin_SeasonController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    	$this->view->all_seasons = $this->_season->getAllSeasons($this->_getParam('page',1),50);
-    	$this->view->controller = $this->_request->getControllerName();
-    	$param['urlPart'] =  '/'.$this->_request->getModuleName().'/'.$this->_request->getControllerName().'/'.$this->_request->getActionName();
-    	$this->view->paginatorParam = $param;
+    	if($this->_getParam('serial',null) != null){
+    		$this->view->all_seasons = $this->_season->getAllSeasons($this->_getParam('page',1),50,$this->_getParam('serial'));
+    		$this->view->controller = $this->_request->getControllerName();
+    		$param['urlPart'] =  '/'.$this->_request->getModuleName().'/'.$this->_request->getControllerName().'/'.$this->_request->getActionName();
+    		$this->view->paginatorParam = $param;
+    	}
+    	else{
+    		$this->_helper->redirector('index','serial');
+    	}
     }
 /*
     public function addAction()
