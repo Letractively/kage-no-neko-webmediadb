@@ -28,8 +28,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headTitle('DMagnets')
              ->setSeparator(' :: ');
         $view->headLink()->prependStylesheet('/css/site.css');
-        $view->headLink()->prependStylesheet('/css/sidebar.css');
+        $view->headLink()->appendStylesheet('/css/sidebar.css');
+        $view->headLink()->appendStylesheet('http://extjs.com/deploy/dev/resources/css/ext-all.css');
         $view->headScript()->prependFile('/js/jquery-1.6.2.min.js');
+        $view->headScript()->appendFile('http://extjs.com/deploy/dev/adapter/ext/ext-base.js');
+        $view->headScript()->appendFile('http://extjs.com/deploy/dev/ext-all.js');
         $view->headScript()->appendFile('/js/site.js');
     }
     
