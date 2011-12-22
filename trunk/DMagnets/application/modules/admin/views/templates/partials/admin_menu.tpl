@@ -3,6 +3,8 @@
   {elseif $controller == 'user'}: пользователи
   {elseif $controller == 'movie'}: медиа: фильмы
   {elseif $controller == 'serial'}: медиа: сериалы
+  {elseif $controller == 'season'}: медиа: сериалы: сезоны
+  {elseif $controller == 'episode'}: медиа: сериалы: эпизоды
   {elseif $controller == 'actor'}: медиа: актеры
   {elseif $controller == 'director'}: медиа: режиссеры
   {elseif $controller == 'country'}: медиа: страны
