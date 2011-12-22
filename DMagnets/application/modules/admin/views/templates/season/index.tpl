@@ -21,7 +21,7 @@
         <td style="display: none;">{$one_season['item_id']}</td>
         <td>{$one_season['season_id']}</td>
         <td>{$one_season['season_num']}</td>
-        <td>{$one_season['season_name']}</td>
+        <td><a href="/admin/episode/index/season/{$one_season['season_id']}" title="Показать эпизоды">{$one_season['season_name']}</a></td>
         <td class="act">{*
           <a href="/admin/season/edit/id/{$one_season['season_id']}"><img title="Редактировать" src="/resources/edit.png"/></a>
           *}
