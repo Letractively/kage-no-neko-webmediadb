@@ -29,10 +29,13 @@ class Admin_SeasonController extends Zend_Controller_Action
     public function addAction()
     {
     	$this->view->headLink()->appendStylesheet('/css/form.css');
-    	$form = new Application_Form_People();
-    	$form->setAction('/admin/actor/add')
-    		 ->setName('actor');
+    	$form = new Application_Form_SerialSub();
+    	$form->setAction('/admin/season/add')
+    		 ->setName('season');
     	$form->getElement('cencel')->setAttrib('onClick', "javascript: window.location = '/".$this->_request->getModuleName()."/".$this->_request->getControllerName()."'");
+    	//$form->getElement('parent_id')
+    	$form->getElement('num')->setLabel('Номер сезона');
+    	$form->getElement('name')->setLabel('Название сезона');
 		$this->view->form = $form;
 		if($this->getRequest()->isPost()){
 			$formData = $this->getRequest()->getPost();
