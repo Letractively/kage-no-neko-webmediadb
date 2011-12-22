@@ -22,7 +22,7 @@
     {foreach name=serials from=$all_serials item=one_serial}
       <tr>
         <td>{$one_serial['film_id']}</td>
-        <td>{$one_serial['name']}</td>
+        <td><a href="/admin/season/index/serial/{$one_serial['film_id']}" title="Показать сезоны">{$one_serial['name']}</a></td>
         <td>{$one_serial['original_name']}</td>
         <td>{$one_serial['year_start']}-{if $one_serial['year_end'] == 'no'}...{else}{$one_serial['year_end']}{/if}</td>
         <td>{$one_serial['seasons_num']}</td>
